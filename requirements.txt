@@ -1,0 +1,9 @@
+Bio==1.5.9
+biopython==1.79
+numpy==1.23.5
+pandas==1.5.3
+pybedtools==0.9.0
+pysam==0.18.0
+scikit_learn==1.0.2
+scipy==1.10.1
+TPOT==0.11.7
