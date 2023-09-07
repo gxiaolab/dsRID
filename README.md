@@ -54,7 +54,7 @@ python -i /data/Pacbio_AD_data.tsv -p <output_dir>/dsRID_whole.tsv -o <output_di
 ```
 
 ## Results
-We evaluated the performance of dsRID using PacBio long-read RNA-seq data derived from Alzheimer's disease (AD) brain and showed that our approach is highly accurate in predicting dsRNA regions in multiple datasets. We applied dsRID to an AD cohort sequenced by the ENCODE consortium and characterized the global dsRNA profile with potentially distinct expression patterns between AD and controls.
+We evaluated the performance of dsRID using PacBio long-read RNA-seq data derived from Alzheimer's disease (AD) brain and showed that our approach is highly accurate in predicting dsRNA regions in multiple datasets. We applied dsRID to an AD cohort sequenced by the ENCODE consortium and characterized the global dsRNA profile with potentially distinct expression patterns between AD and controls. dsRID predicted regions are available under data/dsRID_novel_dsRNA.bed
 
 ## Authors
 Ryo Yamamoto - Bioinformatics Interdepartmental Program, University of California, Los Angeles, California, USA
