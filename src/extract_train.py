@@ -24,14 +24,14 @@ def main(args):
         "-o", "--out_file",
         help="output file location",
         type=str,
-        default="/data/train.tsv"
+        default="./data/train.tsv"
     )
 
     argp.add_argument(
         "-d", "--ds_file",
         help="input double stranded RNA file, tab delimnated bed",
         type=str,
-        default="/data/hg38_dsrna.bed"
+        default="./data/hg38_dsrna.bed"
     )
 
     argp.add_argument(
@@ -46,7 +46,8 @@ def main(args):
     mapq_thr = 20
     #chr = args.chr
 
-    dsrna = pd.read_csv(args.ds_file, sep='\t')
+    dsrna = pd.read_csv(args.ds_file, sep='\t', names=['chr', 'start', 'end', 'name'], header=None)
+    print(dsrna)
     dsrna = dsrna.sort_values(by=['chr', 'start'])
     sam = pysam.AlignmentFile(args.bam_file, 'rb')
 

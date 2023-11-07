@@ -27,7 +27,7 @@ def main(args):
         "-o", "--out_file",
         help="output file location",
         type=str,
-        default="/data/null.tsv"
+        default="./data/null.tsv"
     )
 
     argp.add_argument(
@@ -41,7 +41,7 @@ def main(args):
         "-s", "--splice_anno",
         help="gtf file for splicing region",
         type=str,
-        default="/data/gencode.v34.annotation.sorted.gtf.gz"
+        default="./data/gencode.v34.annotation.sorted.gtf.gz"
     )
 
     argp.add_argument(

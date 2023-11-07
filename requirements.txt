@@ -1,5 +1,5 @@
 Bio==1.5.9
-biopython==1.79
+biopython==1.80
 numpy==1.23.5
 pandas==1.5.3
 pybedtools==0.9.0
