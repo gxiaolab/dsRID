@@ -56,6 +56,8 @@ def main(args):
 
     prev_exists = exists(args.out_file)
 
+    frame_prev = pd.DataFrame()
+
     if prev_exists:
         frame_prev = pd.read_csv(args.out_file, sep='\t')
         for chr in chrs:

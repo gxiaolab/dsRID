@@ -49,8 +49,8 @@ dsRID_whole will contain column of predicted probability to be a candidate dsRNA
 If you would like to opt out training process and directly proceed to prediction step, run
 
 ```
-python -b <input_bam_file> -o <output_dir>
-python -i /data/Pacbio_AD_data.tsv -p <output_dir>/dsRID_whole.tsv -o <output_dir>
+python src/extract_whole.py -b <input_bam_file> -o <output_dir>/dsRID_whole.tsv
+python src/model_predict.py -i /data/Pacbio_AD_data.tsv -p <output_dir>/dsRID_whole.tsv -o <output_dir>
 ```
 
 ## Results

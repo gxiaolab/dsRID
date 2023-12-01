@@ -73,9 +73,9 @@ def main(args):
             pos = read.reference_start
             read_start = read.reference_start
             read_end = read.reference_end
-            cs = cs_to_df(read.get_tag('cs'), pos)
+            cs = CIGAR_to_df(read.cigartuples, pos)
             #print(cs)
-            cs_splice = cs.loc[cs['ope'] == '~']
+            cs_splice = cs.loc[cs['ope'] == 3]
             #print(cs_splice)
             #continue
             for ri, row in cs_splice.iterrows():
@@ -83,14 +83,15 @@ def main(args):
                 high = int(row['high'])
                 # if low < start or high > end:
                 #     continue
-                a = row['val'][0:2]
-                b = row['val'][-2:]
-                length = int(row['val'][2:-2])
-                skipped_bases = read.query_sequence[low - start : high - start]
+                bp_start = read.query_sequence[low-read_start - 2 : low - read_start]
+                bp_end = read.query_sequence[high-read_start : high - read_start + 2]
+                #print(bp_start, bp_end)
+                length = int(row['val'])
+                skipped_bases = read.query_sequence[low - read_start : high - read_start]
                 read_list.append(
                     [read.query_name,
                     chr, low, high, length,
-                    a, b, read_start, read_end, skipped_bases]
+                    bp_start, bp_end, read_start, read_end, skipped_bases]
                 )
         mapped_splices = pd.DataFrame(read_list,
         columns=["read", "chr", "pos_start",

@@ -81,7 +81,7 @@ def main(args):
         end = start + window
         print(chr, start, end)
         coverage = sam.count(chr, start, end)
-        read_lst = list()
+        read_list = list()
         if  coverage < args.read_threshold:
             continue
         for read in sam.fetch(chr, start, end):
@@ -93,8 +93,8 @@ def main(args):
             pos = read.reference_start
             read_start = read.reference_start
             read_end = read.reference_end
-            cs = cs_to_df(read.get_tag('cs'), pos)
-            cs_splice = cs.loc[cs['ope'] == '~']
+            cs = CIGAR_to_df(read.cigartuples, pos)
+            cs_splice = cs.loc[cs['ope'] == 3]
             #print(cs_splice)
             if len(cs_splice) == 0:
                 continue
@@ -103,19 +103,17 @@ def main(args):
                 high = int(row['high'])
                 # if low < start or high > end:
                 #     continue
-                a = row['val'][0:2]
-                b = row['val'][-2:]
-                length = int(row['val'][2:-2])
-                skipped_bases = read.query_sequence[low - start : high - start]
-                #print(read.query_sequence)
-                #print(skipped_bases)
-                read_lst.append(
+                bp_start = read.query_sequence[low-read_start - 2 : low - read_start]
+                bp_end = read.query_sequence[high-read_start : high - read_start + 2]
+                #print(bp_start, bp_end)
+                length = int(row['val'])
+                skipped_bases = read.query_sequence[low - read_start : high - read_start]
+                read_list.append(
                     [read.query_name,
                     chr, low, high, length,
-                    a, b, read_start, read_end, skipped_bases]
+                    bp_start, bp_end, read_start, read_end, skipped_bases]
                 )
-        
-        mapped_splices = pd.DataFrame(read_lst,
+        mapped_splices = pd.DataFrame(read_list,
         columns=["read", "chr", "pos_start",
         "pos_end", "pos_len", "bp_start", "bp_end",
         "read_start", "read_end", "skipped_bases"])
